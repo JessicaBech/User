@@ -1,0 +1,19 @@
+# Spring Properties
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: users
+
+# Server Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /testing-user/

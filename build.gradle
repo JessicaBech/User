@@ -1,0 +1,49 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.6.7'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'io.freefair.lombok' version '6.4.2'
+}
+
+group = 'com.testmongo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+
+// add log4j2 dependency
+configurations.all {
+	exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// add log4j2 dependency
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	// Swagger Doc
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.6'
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-webflux-ui', version: '1.1.45'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+jar {
+	manifest {
+		attributes "Main-Class": "UserApplication"
+	}
+}
+
+bootJar {
+	archivesBaseName = 'user'
+	archiveFileName = 'user.jar'
+	exclude("*.yaml")
+}
